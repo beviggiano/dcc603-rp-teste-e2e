@@ -68,4 +68,23 @@ describe('TODOMvc App', () => {
       .children()
       .should('have.length', 2);
   });
+
+  it('Edita uma tarefa existente', () => {
+  cy.visit('');
+
+  cy.get('[data-cy=todo-input]').type('Tarefa para editar{enter}');
+
+  // Dê dois cliques no label para entrar no modo de edição
+  cy.get('[data-cy=todos-list] li label')
+    .dblclick();
+
+  // Modifica o valor e confirma com Enter
+  cy.get('[data-cy=todos-list] li .edit')
+    .clear()
+    .type('Tarefa editada com sucesso{enter}');
+
+  cy.get('[data-cy=todos-list] li label')
+    .should('have.text', 'Tarefa editada com sucesso');
+});
+
 });
