@@ -87,4 +87,16 @@ describe('TODOMvc App', () => {
     .should('have.text', 'Tarefa editada com sucesso');
 });
 
+it('Marca todas as tarefas como concluídas usando o toggleAll', () => {
+  cy.visit('');
+
+  cy.get('[data-cy=todo-input]').type('Tarefa 1{enter}').type('Tarefa 2{enter}');
+
+  cy.get('.toggle-all-label').click();
+
+  cy.get('[data-cy=todos-list] li').each(($el) => {
+    cy.wrap($el).should('have.class', 'completed');
+  });
+});
+
 });
